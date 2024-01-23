@@ -10,8 +10,8 @@ using StudentDataAccessLayer;
 namespace StudentDataAccessLayer.Migrations
 {
     [DbContext(typeof(DbContxt))]
-    [Migration("20240122085757_Student")]
-    partial class Student
+    [Migration("20240123065047_Students")]
+    partial class Students
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,8 +37,8 @@ namespace StudentDataAccessLayer.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Gender")
-                        .HasColumnType("bit");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("Mobile")
                         .HasColumnType("bigint");

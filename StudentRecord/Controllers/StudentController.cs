@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using StudentDataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +11,18 @@ namespace StudentRecord.Controllers
 {
     public class StudentController : Controller
     {
+        private readonly IStudentRepository _add;
+        private readonly string _connectionstring;
+        public StudentController(IStudentRepository add, IConfiguration configuration)
+        {
+            _add = add;
+            _connectionstring = configuration.GetConnectionString("DbConnection");
+        }
         // GET: StudentController
         public ActionResult Index()
         {
-            return View();
+            var result = _add.GetAllRecords();
+            return View("View",result);
         }
 
         // GET: StudentController/Details/5

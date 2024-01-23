@@ -14,7 +14,7 @@ namespace StudentDataAccessLayer
         public string Name { get; set; }
         public DateTime DOB { get; set; }
         public int Age { get; set; }
-        public bool Gender { get; set; }
+        public string Gender { get; set; }
         public long Mobile { get; set; }
         public string Email { get; set; }
         public string Subject { get; set; }

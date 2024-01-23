@@ -6,9 +6,9 @@ namespace StudentDataAccessLayer
     public interface IStudentRepository
     {
         public IEnumerable<StudentDetails> GetAllRecords();
-        public StudentDetails GetByid(int Id);
+        public StudentDetails GetByID(int id);
         public void Insert(StudentDetails detail);
-        public void Update(int Id, StudentDetails value);
-        public void Delete(int Id);
+        public void Update(int id, StudentDetails stud);
+        public void Delete(int studid);
     }
 }

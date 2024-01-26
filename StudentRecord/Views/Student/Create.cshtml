@@ -28,7 +28,7 @@
                 <span asp-validation-for="Age" id="errorage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
+                <label asp-for="Gender" id="errorgender" class="control-label"></label>
                 <label>
                     @Html.RadioButtonFor(model => model.Gender, "Male")
                     M
@@ -37,7 +37,6 @@
                     @Html.RadioButtonFor(model => model.Gender, "Female")
                     F
                 </label>
-                <span asp-validation-for="Gender" id="errorgender" class="text-danger"></span>
 
             </div>
             <div class="form-group">
@@ -52,8 +51,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
-                <input asp-for="Subject" class="form-control" />
-                <span asp-validation-for="Subject" id="errorsubject" class="text-danger"></span>
+               <select asp-for="Subject" id="errorsub" class="form-control"></select>
+                <span asp-validation-for="Subject"  class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="button" value="Create" id="create" class="btn btn-primary" />
@@ -70,10 +69,26 @@
     <script>
         $(document).ready(function () {
 
+            $.ajax({
+                type: "GET",
+                url: "/api/Course",
+                data: "{}",
+                success: function (data) {
+                    var string = '<option value="-1">--- Please Select ---</option>';
+                    for (var i = 0; i < data.length; i++)
+                    {
+                        string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
+                    }
+                    $("#errorsub").html(string);
+                }
+            });
+
             $("#create").click(function () {
                 debugger;
                 validate();
             });
+
+           
 
         });
 
@@ -166,7 +181,7 @@
                     spandob.style.display = "none";
                 }
 
-                var spangender = $("input[name='Gender']:checked").value();
+                var spangender = $("input[name='Gender']:checked").value("errorgender");
                 if (!gender) {
                     spangender.innerText = "Please Select Your Gender";
                     spangender.style.display = "block";
@@ -185,6 +200,12 @@
             }
             return isvalid;
         }
+
+
+
+
+
+        
 
     </script>
 }

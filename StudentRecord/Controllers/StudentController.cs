@@ -134,23 +134,47 @@ namespace StudentRecord.Controllers
 
 
         [HttpGet]
-        [Route("~/api/Subject")]
+        [Route("~/api/Course")]
         public ActionResult Subject()
         {
             try
             {
-                Dropdown Dvalue = new Dropdown();
-                var get = Dvalue.Getvalue();
+                var get = Getvalue();
                 return Ok(get.ToList());
+            }
+            catch(Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+
             }
 
         }
+        
+            private List<Subject> Getvalue()
+            {
+
+                List<Subject> Course = new List<Subject>();
+                Subject input = new Subject();
+                input.ID = 1;
+                input.Name = "ECE";
+                Course.Add(input);
+
+                Subject inner = new Subject();
+                inner.ID = 2;
+                inner.Name = "CSE";
+                Course.Add(inner);
+
+                Subject inter = new Subject();
+                inter.ID = 3;
+                inter.Name = "MECH";
+                Course.Add(inter);
+                return Course;
+
+            }
+        
     }
 }
-/*
- [http]
- 
- 
- 
- 
- */
+

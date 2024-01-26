@@ -7,8 +7,8 @@ namespace StudentDataAccessLayer
     {
         public IEnumerable<StudentDetails> GetAllRecords();
         public StudentDetails GetByID(int id);
-        public void Insert(StudentDetails detail);
-        public void Update(int id, StudentDetails stud);
-        public void Delete(int studid);
+        public void InsertStudent(StudentDetails detail);
+        public void UpdateStudent(int id, StudentDetails stud);
+        public void DeleteStudent(int studid);
     }
 }

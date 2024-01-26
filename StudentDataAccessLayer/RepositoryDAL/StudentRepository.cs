@@ -14,12 +14,7 @@ namespace StudentDataAccessLayer
         {
             _contxt = contxt;
         }
-
-        
-
-       
-
-        public void Insert(StudentDetails stud)
+        public void InsertStudent(StudentDetails stud)
         {
             try
             {
@@ -30,18 +25,18 @@ namespace StudentDataAccessLayer
                 throw;
             }
         }
-        public void Update(int id, StudentDetails stud)
+        public void UpdateStudent(int id, StudentDetails stud)
         {
             try
             {
-                var result = _contxt.Database.ExecuteSqlRaw($" UpdateStudents set Name='{stud.Name}',DOB='{stud.DOB}',Age={stud.Age},Gender='{stud.Gender}',MobileNum='{stud.Mobile}', Emailid='{stud.Email}',Subject='{stud.Subject}' where StudentID={id} ");
+                var result = _contxt.Database.ExecuteSqlRaw($" Update Students set Name='{stud.Name}',DOB='{stud.DOB}',Age={stud.Age},Gender='{stud.Gender}',Mobile='{stud.Mobile}', Email='{stud.Email}',Subject='{stud.Subject}' where StudentID={id} ");
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
-        public void Delete(int studid)
+        public void DeleteStudent(int studid)
         {
             try
             {

@@ -28,22 +28,39 @@ namespace StudentRecord.Controllers
         // GET: StudentController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            try
+            {
+                var result = _add.GetByID(id);
+                return View("Details", result);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         // GET: StudentController/Create
         public ActionResult Create()
         {
-            return View();
+            try
+            {
+                var result = new StudentDetails();
+                return View("Create", result);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         // POST: StudentController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(StudentDetails value)
         {
             try
             {
+                _add.InsertStudent(value);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -55,43 +72,85 @@ namespace StudentRecord.Controllers
         // GET: StudentController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            try
+            {
+                var result = _add.GetByID(id);
+                return View("Edit", result);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         // POST: StudentController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, StudentDetails value)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _add.UpdateStudent(id, value);
+                var result = _add.GetAllRecords();
+                return View("View", result);
             }
             catch
             {
-                return View();
+                return View("Error");
             }
         }
 
         // GET: StudentController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            try
+            {
+                var result = _add.GetByID(id);
+                return View("Delete", result);
+            }
+            catch
+            {
+                return View("Error");
+            }
         }
 
         // POST: StudentController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult DeleteByID(int StudentID)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                _add.DeleteStudent(StudentID);
+                var result = _add.GetAllRecords();
+                return View("View", result);
             }
             catch
             {
                 return View();
             }
         }
+
+
+
+        [HttpGet]
+        [Route("~/api/Subject")]
+        public ActionResult Subject()
+        {
+            try
+            {
+                Dropdown Dvalue = new Dropdown();
+                var get = Dvalue.Getvalue();
+                return Ok(get.ToList());
+            }
+
+        }
     }
 }
+/*
+ [http]
+ 
+ 
+ 
+ 
+ */

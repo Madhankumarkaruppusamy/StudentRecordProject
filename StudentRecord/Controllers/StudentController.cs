@@ -45,6 +45,7 @@ namespace StudentRecord.Controllers
             try
             {
                 var result = new StudentDetails();
+                result.Gender = "Male";
                 return View("Create", result);
             }
             catch
@@ -134,7 +135,7 @@ namespace StudentRecord.Controllers
 
 
         [HttpGet]
-        [Route("~/api/Course")]
+        [Route("~/api/depart")]
         public ActionResult Subject()
         {
             try
@@ -156,22 +157,22 @@ namespace StudentRecord.Controllers
             private List<Subject> Getvalue()
             {
 
-                List<Subject> Course = new List<Subject>();
+                List<Subject> depart = new List<Subject>();
                 Subject input = new Subject();
                 input.ID = 1;
                 input.Name = "ECE";
-                Course.Add(input);
+                depart.Add(input);
 
                 Subject inner = new Subject();
                 inner.ID = 2;
                 inner.Name = "CSE";
-                Course.Add(inner);
+                depart.Add(inner);
 
                 Subject inter = new Subject();
                 inter.ID = 3;
                 inter.Name = "MECH";
-                Course.Add(inter);
-                return Course;
+                depart.Add(inter);
+                return depart;
 
             }
         

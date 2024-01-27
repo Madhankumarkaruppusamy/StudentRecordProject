@@ -52,7 +52,7 @@
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                <select asp-for="Subject" id="errorsub" class="form-control"></select>
-                <span asp-validation-for="Subject"  class="text-danger"></span>
+                <span asp-validation-for="Subject" id="errorsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="button" value="Create" id="create" class="btn btn-primary" />
@@ -68,6 +68,7 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
+            debugger;
 
             $.ajax({
                 type: "GET",
@@ -107,6 +108,7 @@
 
             var dob = document.getElementById("DOB").value;
 
+            var sub = document.getElementById("Subject").value;
 
 
 
@@ -181,6 +183,18 @@
                     spandob.style.display = "none";
                 }
 
+                var spansub = document.getElementById("errorsub");
+
+                if (sub == "" || sub == "Please select") {
+                    spansub.innerText = "Please Enter Your Subject";
+                    spansub.style.display = "block";
+                    isvalid = false;
+                }
+                else
+                {
+                    spansub.style.display = "none";
+                }
+
                 var spangender = $("input[name='Gender']:checked").value("errorgender");
                 if (!gender) {
                     spangender.innerText = "Please Select Your Gender";
@@ -191,6 +205,8 @@
                 else {
                     spangender.style.display = "none";
                 }
+
+                
 
 
 

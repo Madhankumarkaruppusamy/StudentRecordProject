@@ -30,13 +30,14 @@
             <div class="form-group">
                 <label asp-for="Gender" id="txtgender" class="control-label"></label><br />
                 <label>
-                    @Html.RadioButtonFor(model => model.Gender, "Male")
+                    @Html.RadioButtonFor(model => model.Gender, "Male" )
                     Male
                 </label><br />
                 <label>
                     @Html.RadioButtonFor(model => model.Gender, "Female")
                     Female
                 </label>
+                <span asp-validation-for="Gender" id="radiogen" class="text-danger"></span>
 
             </div>
             <div class="form-group">
@@ -52,7 +53,7 @@
             <div class="form-group">
                 <label asp-for="Subject" class="control-label"></label>
                <select asp-for="Subject" id="drpsub" class="form-control"></select>
-                <span asp-validation-for="Subject"  class="text-danger"></span>
+                <span asp-validation-for="Subject"  id="drpsubject" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="button" value="Create" id="create" class="btn btn-primary" />
@@ -179,20 +180,23 @@
                 spandob.style.display = "none";
             }
 
-                @*var spansub = document.getElementById("txtsubject");
-
-                if (sub >= 0 || sub == "Please select") {
-                    spansub.innerText = "Please Enter Your Subject";
-                    spansub.style.display = "block";
-                    isvalid = false;
-                }
-                else {
-                    spansub.style.display = "none";
-                }*@
-
-
-
-            var spangender = $("input[name='Gender']:checked").value("txtgender");
+            var spansub = document.getElementById("drpsub");
+            var sub = spansub.options[spansub.selectedIndex].value;
+            var spansubject = document.getElementById("drpsubject");
+            if (sub == "" || sub == -1 || sub ==0)
+            {
+                spansub.style.borderColor = "red";
+                spansubject.innerText = "Please Enter Your Subject";
+                spansubject.style.display = "block";
+                isvalid = false;
+            }
+            else
+            {
+                spansub.style.borderColor = "black";
+                spansubject.style.display = "none";
+            }
+            debugger;
+            var spangender = $("input[name='Gender']:checked").value;
             if (!gender) {
                 spangender.innerText = "Please Select Your Gender";
                 spangender.style.display = "block";

@@ -55,7 +55,7 @@ namespace StudentRecord.Controllers
 
         // POST: StudentController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public ActionResult Create(StudentDetails value)
         {
             try

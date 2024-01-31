@@ -4,66 +4,74 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<div id="contentData">
 
-<h4>StudentDetails</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DOB" class="control-label"></label>
-                <input asp-for="DOB" class="form-control" />
-                <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Age" class="control-label"></label>
-                <input asp-for="Age" class="form-control" />
-                <span asp-validation-for="Age" id="txtage" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Gender" id="txtgender" class="control-label"></label><br />
-                <label>
-                    @Html.RadioButtonFor(model => model.Gender, "Male" )
-                    Male
-                </label><br />
-                <label>
-                    @Html.RadioButtonFor(model => model.Gender, "Female")
-                    Female
-                </label>
-                <span asp-validation-for="Gender" id="radiogen" class="text-danger"></span>
 
-            </div>
-            <div class="form-group">
-                <label asp-for="Mobile" class="control-label"></label>
-                <input asp-for="Mobile" class="form-control" />
-                <span asp-validation-for="Mobile" id="txtmobile" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" id="txtemail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Subject" class="control-label"></label>
-               <select asp-for="Subject" id="drpsub" class="form-control"></select>
-                <span asp-validation-for="Subject"  id="drpsubject" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="button" value="Create" id="create" class="btn btn-primary" />
-            </div>
-        </form>
+    <h1>Create</h1>
+
+    <h4>StudentDetails</h4>
+    <hr />
+
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" placeholder="Enter your name" class="form-control" />
+                    <span asp-validation-for="Name" id="txtname" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DOB" class="control-label"></label>
+                    <input asp-for="DOB" class="form-control" value="YYYY-MM-DDT00:00" />
+                    <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Age" class="control-label"></label>
+                    <input asp-for="Age" class="form-control" placeholder="Enter Your Age" value="" />
+                    <span asp-validation-for="Age" id="txtage" class="text-danger"></span>
+                </div>
+
+                <div class="radio-btn label">
+                    <label id="radgen">Gender</label><br />
+
+                    <input type="radio" name="radio" id="male" value="Male">
+                    <label for="radio">Male</label>
+                    <input type="radio" name="radio" id="female" value="Female">
+                    <label for="radio">Female</label>
+
+                </div>
+                <div>
+                    <span asp-validation-for="Gender" id="errgender" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Mobile" class="control-label"></label>
+                    <input asp-for="Mobile" class="form-control" placeholder="Enter Your Mobile Number" value="" />
+                    <span asp-validation-for="Mobile" id="txtmobile" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" placeholder="Enter Your Email"/>
+                    <span asp-validation-for="Email" id="txtemail" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Subject" class="control-label"></label>
+                    <select asp-for="Subject" id="drpsub" class="form-control"></select>
+                    <span asp-validation-for="Subject" id="drpsubject" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="button" value="Create" id="create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
 </div>
 
 @section Scripts {
@@ -71,14 +79,94 @@
         $(document).ready(function () {
             debugger;
 
+            $("#Name").keyup(function () {
 
 
-            $("#create").click(function () {
-                debugger;
 
-                validate();
+               var name = document.getElementById("Name").value;
+               if (name.length >= 10) {
+                   return;
+                }
+               
+
+
 
             });
+
+            $("#Name").blur(function () {
+
+             
+
+                var name = document.getElementById("Name").value;
+                var spanname = document.getElementById("txtname");
+                if (name == "" || name.length == 0) {
+                    spanname.innerText = "Please Enter Your Name";
+                    spanname.style.display = "block";
+                }
+                else {
+                    spanname.style.display = "none";
+                }
+
+
+
+            });
+            
+
+            $("#create").click(function () {
+
+                debugger;
+               
+                if (validate()) {
+
+                    var name = document.getElementById("Name").value;
+                    var mobile = document.getElementById("Mobile").value;
+                    var email = document.getElementById("Email").value;
+                    var dob = document.getElementById("DOB").value;
+                    var age = document.getElementById("Age").value;
+                    var radios = document.getElementsByName("radio");
+                    var radgender = ""
+                    for (var i = 0, length = radios.length; i < length; i++) {
+                        if (radios[i].checked) {
+                            radgender = radios[i].value;
+                            break;
+                        }
+                    }
+                    var spansub = document.getElementById("drpsub");
+                    var sub = spansub.options[spansub.selectedIndex].value;
+                    var DataInsert = {
+                        "Name": name,
+                        "Mobile": mobile,
+                        "DOB": dob,
+                        "Age": age,
+                        "Gender": radgender,
+                        "Email": email,
+                        "Subject": sub
+                    };
+
+
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/Student/Create",
+                        data: DataInsert,
+                        success: function (data)
+                        {
+
+                            alert("Successfully Registered");
+                            window.location.href = "/student/index";
+
+                            //document.getElementById("contentData").innerHTML = data;
+                        },
+                        error: function (ex)
+                        {
+                            alert("Something went wrong");
+                        }
+
+                    });
+
+                }
+            });
+
 
 
             $.ajax({
@@ -86,18 +174,23 @@
                 url: "/api/depart",
                 data: "{}",
                 success: function (data) {
-                    var string = '<option value="-1">--- Please Select ---</option>';
+                    var string = '<option value="-1">--- Please Select Your Subject ---</option>';
                     for (var i = 0; i < data.length; i++) {
                         string += '<option value="' + data[i].id + '">' + data[i].name + '</option>';
                     }
                     $("#drpsub").html(string);
                 }
             });
-
-
-
         });
 
+
+
+
+                
+
+                
+        
+                         
 
         function validate() {
 
@@ -106,8 +199,6 @@
             var age = document.getElementById("Age").value;
 
             var mobile = document.getElementById("Mobile").value;
-
-            var gender = document.getElementById("Gender").value;
 
             var email = document.getElementById("Email").value;
 
@@ -134,8 +225,9 @@
 
 
             var spanage = document.getElementById("txtage");
-            if (age <= 0) {
-                spanage.innerText = "Please Enter Valid Age";
+            if (age <= 0)
+            {
+                spanage.innerText = "Please Enter Your Age";
                 spanage.style.display = "block";
 
                 isvalid = false;
@@ -146,7 +238,7 @@
 
             var spanmobile = document.getElementById("txtmobile");
             if (mobile.length != 10) {
-                spanmobile.innerText = "Please Enter Valid 10-Digit Phone Number";
+                spanmobile.innerText = "Please Enter Valid 10-Digit Mobile Number";
                 spanmobile.style.display = "block";
 
                 isvalid = false;
@@ -183,29 +275,40 @@
             var spansub = document.getElementById("drpsub");
             var sub = spansub.options[spansub.selectedIndex].value;
             var spansubject = document.getElementById("drpsubject");
+          
             if (sub == "" || sub == -1 || sub ==0)
             {
-                spansub.style.borderColor = "red";
-                spansubject.innerText = "Please Enter Your Subject";
+                
+                spansubject.innerText = "Please Select Your Subject From Dropdown";
                 spansubject.style.display = "block";
                 isvalid = false;
             }
             else
             {
-                spansub.style.borderColor = "black";
                 spansubject.style.display = "none";
             }
-            debugger;
-            var spangender = $("input[name='Gender']:checked").value;
-            if (!gender) {
-                spangender.innerText = "Please Select Your Gender";
-                spangender.style.display = "block";
 
+            var radios = document.getElementsByName("radio");
+            var value = ""
+            for (var i = 0, length = radios.length; i < length; i++) {
+                if (radios[i].checked) {
+                    value = radios[i].value;
+                    break;
+                }
+            }
+
+            var gender = document.getElementById("errgender");
+            if (!value)
+            {
+                gender.innerText = "Please Select Your Gender";
+                gender.style.display = "block";
                 isvalid = false;
             }
-            else {
-                spangender.style.display = "none";
+            else
+            {
+                gender.style.display = "none";
             }
+   
 
             return isvalid;
         }

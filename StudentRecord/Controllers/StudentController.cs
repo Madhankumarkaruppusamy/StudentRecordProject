@@ -40,12 +40,22 @@ namespace StudentRecord.Controllers
         }
 
         // GET: StudentController/Create
-        public ActionResult Create()
+        public ActionResult Create( int ? id)
         {
+            
             try
             {
-                var result = new StudentDetails();
-                return View("Create", result);
+                if (id.HasValue)
+                {
+                    var Get = _add.GetByID(id.Value);
+                    return View("Create", Get);
+                }
+                else
+                {
+                    var result = new StudentDetails();
+                    result.DOB = DateTime.Now;
+                    return View("Create", result);
+                }
             }
             catch
             {
@@ -60,8 +70,17 @@ namespace StudentRecord.Controllers
         {
             try
             {
-                _add.InsertStudent(value);
+                if(value.StudentID==0)
+                {
+                    _add.InsertStudent(value);
+                   
+                }
+                else
+                {
+                    _add.UpdateStudent(value.StudentID, value);
+                }
                 return RedirectToAction(nameof(Index));
+
             }
             catch
             {
@@ -142,7 +161,7 @@ namespace StudentRecord.Controllers
                 var get = Getvalue();
                 return Ok(get.ToList());
             }
-            catch(Exception ex)
+            catch(Exception )
             {
                 throw;
             }

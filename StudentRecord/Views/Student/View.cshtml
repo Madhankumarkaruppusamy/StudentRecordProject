@@ -3,6 +3,45 @@
 @{
     ViewData["Title"] = "View";
 }
+@section scripts{<script>
+    $(document).ready(function () {
+                
+        $('.Delete').click(function (e) {
+
+            //alert($(this).attr("data-id"));
+            var ID = $(this).attr("data-id");
+            // alert($(this).attr("data-name"));
+            var Name = $(this).attr("data-name");
+
+
+            debugger;
+            if (confirm("Are you sure want to delete this Id =" + ID + " with Name= " + Name +"?")) {
+                var post = {
+                    "id": ID
+                };
+                $.ajax({
+                    type: "POST",
+                    url: "/Student/DeleteByID",
+                    data: post,
+                    success: function (data) {
+
+                         alert("Successfully Deleted Id number:" +ID);
+
+                    }
+                });
+            }
+            else {
+                window.location.href = "/student/index";
+            }
+
+        });
+
+
+    });
+
+     </script> }
+
+
 
 <h1>Student Records</h1>
 
@@ -69,7 +108,7 @@
             <td>
                 <a asp-action="Create" asp-route-id="@item.StudentID">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.StudentID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.StudentID">Delete</a>
+                <a href="" class="Delete" data-name="@item.Name" data-id="@item.StudentID">Delete</a>
             </td>
         </tr>
 }

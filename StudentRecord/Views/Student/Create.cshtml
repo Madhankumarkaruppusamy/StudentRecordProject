@@ -65,7 +65,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="Subject" class="control-label"></label>
-                    <input asp-for="Subject" type="hidden"  id="hdnSubject" />
+                    <input asp-for="Subject" type="hidden"  id="hdnsubject" />
                     <select asp-for="Subject" id="drpsub" class="form-control"></select>
                     <span asp-validation-for="Subject" id="drpsubject" class="text-danger"></span>
                 </div>
@@ -152,7 +152,7 @@
 
                     var name = document.getElementById("Name").value;
                     var mobile = document.getElementById("Mobile").value;
-                    var StudentId = document.getElementById("StudentID").value;
+                    var StudentId = document.getElementById("Studentid").value;
                     var email = document.getElementById("Email").value;
                     var dob = document.getElementById("DOB").value;
                     var age = document.getElementById("Age").value;
@@ -214,8 +214,6 @@
                     }
                     $("#drpsub").html(string);
 
-                    alert($("#hdnSubject").val());
-
                     $('#drpsub').val($("#hdnsubject").val());
                 }
             });
@@ -228,7 +226,7 @@
 
             var name = document.getElementById("Name").value;
 
-            var age = document.getElementById("Age").value;
+            //var age = document.getElementById("Age").value;
 
             var mobile = document.getElementById("Mobile").value;
 
@@ -256,18 +254,19 @@
             }
 
 
+            $("#Age").blur(function () {
+                var age = document.getElementById("Age").value;
+                var spanage = document.getElementById("txtage");
+                if (age < 0 || age == 0) {
+                    spanage.innerText = "Please Enter Your Age";
+                    spanage.style.display = "block";
 
-            var spanage = document.getElementById("txtage");
-            if (age <= 0)
-            {
-                spanage.innerText = "Please Enter Your Age";
-                spanage.style.display = "block";
-
-                isvalid = false;
-            }
-            else {
-                spanage.style.display = "none";
-            }
+                    isvalid = false;
+                }
+                else {
+                    spanage.style.display = "none";
+                }
+            });
 
             var spanmobile = document.getElementById("txtmobile");
             if (mobile.length != 10) {
@@ -298,7 +297,7 @@
 
             var spandob = document.getElementById("txtdob");
             debugger;
-            if (dob === "" || dob == "0001-01-01T00:00")
+            if (dob === "" )
             {
                 spandob.innerText = "Please Enter Your DOB";
                 spandob.style.display = "block";

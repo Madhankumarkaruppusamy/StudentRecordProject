@@ -54,6 +54,7 @@ namespace StudentRecord.Controllers
                 {
                     var result = new StudentDetails();
                     result.DOB = DateTime.Now;
+                    result.Age = 0;
                     return View("Create", result);
                 }
             }
@@ -135,14 +136,15 @@ namespace StudentRecord.Controllers
 
         // POST: StudentController/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteByID(int StudentID)
+        //[ValidateAntiForgeryToken]
+        public ActionResult DeleteByID(int id)
         {
             try
             {
-                _add.DeleteStudent(StudentID);
+                _add.DeleteStudent(id);
                 var result = _add.GetAllRecords();
                 return View("View", result);
+
             }
             catch
             {

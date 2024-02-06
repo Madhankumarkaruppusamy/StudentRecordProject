@@ -9,6 +9,12 @@ namespace StudentDataAccessLayer
 {
     public class StudentDetails
     {
+        
+        public StudentDetails()
+        {
+            Subject = "-1";
+            DOB = DateTime.Now;
+        }
         [Key]
         public int StudentID {get;set;}
         public string Name { get; set; }

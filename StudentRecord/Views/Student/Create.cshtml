@@ -103,8 +103,6 @@
 
             $("#Name").blur(function () {
 
-
-
                 var name = document.getElementById("Name").value;
                 var spanname = document.getElementById("txtname");
                 if (name == "" || name.length == 0) {
@@ -114,9 +112,34 @@
                 else {
                     spanname.style.display = "none";
                 }
+            });
+            $("#Mobile").blur(function () {
 
+                var mobile = document.getElementById("Mobile").value;
+                var spanmobile = document.getElementById("txtmobile");
+                if (mobile.length != 10) {
+                    spanmobile.innerText = "Please Enter Valid 10-Digit Mobile Number";
+                    spanmobile.style.display = "block";
 
+                    isvalid = false;
+                }
+                else {
+                    spanmobile.style.display = "none";
+                }
+            });
+            $("#Email").blur(function () {
 
+                var email = document.getElementById("Email").value;
+                var spanemail = document.getElementById("txtemail");
+
+                if (!(mailformat.test(email))) {
+                    spanemail.innerText = "Please Enter Valid Email Address like (example@gmail.com)";
+                    spanemail.style.display = "block";
+                    isvalid = false;
+                }
+                else {
+                    spanemail.style.display = "none";
+                }
             });
 
 
@@ -257,7 +280,7 @@
             $("#Age").blur(function () {
                 var age = document.getElementById("Age").value;
                 var spanage = document.getElementById("txtage");
-                if (age < 0 || age == 0) {
+                if (age <= 0) {
                     spanage.innerText = "Please Enter Your Age";
                     spanage.style.display = "block";
 
@@ -297,7 +320,7 @@
 
             var spandob = document.getElementById("txtdob");
             debugger;
-            if (dob === "" )
+            if (dob === "" || dob == "0001-01-01T00:00")
             {
                 spandob.innerText = "Please Enter Your DOB";
                 spandob.style.display = "block";

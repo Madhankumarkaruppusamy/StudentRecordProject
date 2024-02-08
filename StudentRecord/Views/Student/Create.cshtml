@@ -31,6 +31,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="DOB" class="control-label"></label>
+                    <input id="hdnDOB" asp-for="DOB" type="hidden"class="form-control" />
                     <input asp-for="DOB"  type="text"class="form-control" />
                     <span asp-validation-for="DOB" id="txtdob" class="text-danger"></span>
                 </div>
@@ -162,7 +163,7 @@
                 $('#hdnDOB').val($('#DOB').val());
             });
             $("#DOB").on('change keyup paste mouseup', function () {
-                $('#hdnDateofBirth').val($('#DateofBirth').val());
+                $('#hdnDOB').val($('#DOB').val());
             });
 
 

@@ -10,8 +10,8 @@ using StudentDataAccessLayer;
 namespace StudentDataAccessLayer.Migrations
 {
     [DbContext(typeof(DbContxt))]
-    [Migration("20240123065047_Students")]
-    partial class Students
+    [Migration("20240226071816_Student")]
+    partial class Student
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

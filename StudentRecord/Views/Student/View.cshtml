@@ -8,14 +8,13 @@
                 
         $('.Delete').click(function (e) {
 
-            //alert($(this).attr("data-id"));
             var ID = $(this).attr("data-id");
-            // alert($(this).attr("data-name"));
             var Name = $(this).attr("data-name");
 
 
             debugger;
-            if (confirm("Are you sure want to delete this Id =" + ID + " with Name= " + Name +"?")) {
+            // if (confirm("Are you sure want to delete this Id =" + ID + " with Name= " + Name + "?")) {
+            if (confirm(`Are you sure you want to delete this Id = ${ID} with Name= ${Name}?`)) {
                 var post = {
                     "id": ID
                 };
@@ -23,9 +22,11 @@
                     type: "POST",
                     url: "/Student/DeleteByID",
                     data: post,
-                    success: function (data) {
+                    success: function (data)
+                    {
 
-                         alert("Successfully Deleted Id number:" +ID);
+                         alert(`Successfully Deleted Id:${ID}`);
+                        window.location.href = "/student/index";
 
                     }
                 });

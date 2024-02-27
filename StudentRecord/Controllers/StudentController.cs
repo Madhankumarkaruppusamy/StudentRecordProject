@@ -53,7 +53,6 @@ namespace StudentRecord.Controllers
                 else
                 {
                     var result = new StudentDetails();
-                    result.DOB = DateTime.Now;
                     result.Age = 0;
                     return View("Create", result);
                 }

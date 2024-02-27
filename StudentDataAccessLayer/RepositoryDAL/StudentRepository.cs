@@ -18,7 +18,7 @@ namespace StudentDataAccessLayer
         {
             try
             {
-                _contxt.Database.ExecuteSqlRaw($"exec InsertStudents '{stud.Name}','{stud.DOB}',{stud.Age},'{stud.Gender}',{stud.Mobile} ,'{stud.Email}','{stud.Subject}'");
+                _contxt.Database.ExecuteSqlRaw($"Insert into Students values('{stud.Name}','{stud.DOB}',{stud.Age},'{stud.Gender}',{stud.Mobile} ,'{stud.Email}','{stud.Subject}')");
             }
             catch (Exception ex)
             {

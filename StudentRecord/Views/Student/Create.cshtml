@@ -85,22 +85,10 @@
 @section Scripts {
     <script>
         $(document).ready(function () {
-            debugger;
+            
          
 
-            $("#Name").keydown(function () {
-
-
-
-               var name = document.getElementById("Name").value;
-               if (name.length >= 10) {
-                   return;
-                }
-
-
-
-
-            });
+            
 
             $("#Name").blur(function () {
 
@@ -170,7 +158,6 @@
 
             $("#Create").click(function () {
 
-                debugger;
 
                 if (validate()) {
 
@@ -213,7 +200,6 @@
                             alert("Successfully Registered");
                             window.location.href = "/student/index";
 
-                            //document.getElementById("contentData").innerHTML = data;
                         },
                         error: function (ex)
                         {
